@@ -1,0 +1,72 @@
+export interface Dictionary {
+  common: {
+    save: string;
+    cancel: string;
+    delete: string;
+    edit: string;
+    add: string;
+    back: string;
+    loading: string;
+    close: string;
+  };
+  auth: {
+    login: string;
+    loginTitle: string;
+    loginSubtitle: string;
+    continueWithGoogle: string;
+    logout: string;
+  };
+  onboarding: {
+    displayNameTitle: string;
+    displayNameHint: string;
+    displayNamePlaceholder: string;
+    continue: string;
+  };
+  collection: {
+    title: string;
+    empty: string;
+    totalItems: string;
+    totalInvested: string;
+    totalEstimated: string;
+    profitLoss: string;
+    addItem: string;
+  };
+  itemType: {
+    autograph: string;
+    photo: string;
+    card: string;
+    jersey: string;
+    letter: string;
+    other: string;
+  };
+  authentication: {
+    certificate: string;
+    inPerson: string;
+    unverified: string;
+  };
+  persons: {
+    title: string;
+    search: string;
+    requestSent: string;
+  };
+  requests: {
+    title: string;
+    status: {
+      waiting: string;
+      received: string;
+      returned: string;
+      no_response: string;
+    };
+    daysWaiting: string;
+    markReceived: string;
+    markReturned: string;
+    markNoResponse: string;
+  };
+  settings: {
+    title: string;
+    displayName: string;
+    showNameOnPhotos: string;
+    deleteAccount: string;
+    deleteAccountWarning: string;
+  };
+}
