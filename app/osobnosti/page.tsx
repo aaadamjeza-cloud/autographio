@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import Header from "@/components/Header";
-import PersonAvatar from "@/components/PersonAvatar";
+import PersonPortrait from "@/components/PersonPortrait";
 import { CATEGORY_LABELS, CATEGORY_COLORS, MOCK_PERSONS, type PersonCategory } from "@/lib/mockData/persons";
 
 const TABS: Array<{ key: PersonCategory | "all"; label: string }> = [
@@ -61,7 +61,7 @@ export default function PersonsPage() {
           {filtered.length === 0 && <p className="persons-empty">Žádná osobnost neodpovídá hledání.</p>}
           {filtered.map((p) => (
             <Link key={p.slug} href={`/osobnosti/${p.slug}`} className="person-card">
-              <PersonAvatar name={p.name} category={p.category} />
+              <PersonPortrait slug={p.slug} name={p.name} category={p.category} />
               <div>
                 <p className="person-card-name">{p.name}</p>
                 <p className="person-card-years">

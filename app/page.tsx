@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Header from "@/components/Header";
-import PersonAvatar from "@/components/PersonAvatar";
+import PersonPortrait from "@/components/PersonPortrait";
 import { CATEGORY_LABELS, CATEGORY_COLORS, MOCK_PERSONS } from "@/lib/mockData/persons";
 
 export default function Home() {
@@ -43,7 +43,7 @@ export default function Home() {
 
             <div className="showcase-card">
               <div className="showcase-head">
-                <PersonAvatar name="Zdeněk Svěrák" category="herec" size={52} />
+                <PersonPortrait slug="zdenek-sverak-demo" name="Zdeněk Svěrák" category="herec" size={52} />
                 <div>
                   <p className="showcase-title">Podpis — Zdeněk Svěrák</p>
                   <p className="showcase-subtitle">Fotka · osobně získáno</p>
@@ -75,7 +75,7 @@ export default function Home() {
           <div className="strip-row">
             {MOCK_PERSONS.map((p) => (
               <Link key={p.slug} href={`/osobnosti/${p.slug}`} className="person-card strip-card">
-                <PersonAvatar name={p.name} category={p.category} size={56} />
+                <PersonPortrait slug={p.slug} name={p.name} category={p.category} size={56} />
                 <div>
                   <p className="person-card-name" style={{ fontSize: 13 }}>
                     {p.name}

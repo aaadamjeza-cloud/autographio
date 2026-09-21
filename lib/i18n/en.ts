@@ -53,6 +53,12 @@ const en: Dictionary = {
     title: "Persons",
     search: "Search a person…",
     requestSent: "I sent a request",
+    bio: "About",
+    funFact: "Fun fact",
+    filmography: "Filmography",
+    photoPlaceholder: "No photo uploaded yet",
+    priceHistory: "Price history",
+    verifiedSales: "Verified sales",
   },
   requests: {
     title: "My requests",
@@ -73,6 +79,16 @@ const en: Dictionary = {
     showNameOnPhotos: "Show name on public photos",
     deleteAccount: "Delete account",
     deleteAccountWarning: "This permanently deletes your account, collection, and uploaded photos.",
+  },
+  photoPicker: {
+    addPhoto: "Add photo",
+    changePhoto: "Change photo",
+    limitHint: "Up to 5 photos per item. Resized to 1200px and converted to WebP right in your browser.",
+    limitReached: "5-photo limit reached.",
+    processing: "Processing…",
+    remove: "Remove",
+    tooLarge: "File is too large (max 20 MB).",
+    notAnImage: "That's not an image.",
   },
 };
 

@@ -54,6 +54,12 @@ const cs: Dictionary = {
     title: "Osobnosti",
     search: "Hledat osobnost…",
     requestSent: "Poslal jsem žádost",
+    bio: "O něm",
+    funFact: "Zajímavost",
+    filmography: "Filmografie",
+    photoPlaceholder: "Fotka zatím není nahraná",
+    priceHistory: "Vývoj ceny",
+    verifiedSales: "Doložené prodeje",
   },
   requests: {
     title: "Moje žádosti",
@@ -74,6 +80,16 @@ const cs: Dictionary = {
     showNameOnPhotos: "Zobrazovat jméno u veřejných fotek",
     deleteAccount: "Smazat účet",
     deleteAccountWarning: "Tato akce nevratně smaže účet, sbírku i nahrané fotky.",
+  },
+  photoPicker: {
+    addPhoto: "Přidat fotku",
+    changePhoto: "Změnit fotku",
+    limitHint: "Max 5 fotek na kus. Zmenší se na 1200 px a převedou do WebP přímo v prohlížeči.",
+    limitReached: "Dosažen limit 5 fotek.",
+    processing: "Zpracovávám…",
+    remove: "Odebrat",
+    tooLarge: "Soubor je moc velký (max 20 MB).",
+    notAnImage: "Tohle není obrázek.",
   },
 };
 

@@ -48,6 +48,12 @@ export interface Dictionary {
     title: string;
     search: string;
     requestSent: string;
+    bio: string;
+    funFact: string;
+    filmography: string;
+    photoPlaceholder: string;
+    priceHistory: string;
+    verifiedSales: string;
   };
   requests: {
     title: string;
@@ -68,5 +74,15 @@ export interface Dictionary {
     showNameOnPhotos: string;
     deleteAccount: string;
     deleteAccountWarning: string;
+  };
+  photoPicker: {
+    addPhoto: string;
+    changePhoto: string;
+    limitHint: string;
+    limitReached: string;
+    processing: string;
+    remove: string;
+    tooLarge: string;
+    notAnImage: string;
   };
 }
