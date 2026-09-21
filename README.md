@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Autografio
 
-## Getting Started
+Nekomerční koníčkový web pro českou komunitu sběratelů autogramů (s výhledem na zahraničí). Soukromá evidence sbírky, katalog osobností a sledování žádostí o podpis s veřejnou agregovanou statistikou.
 
-First, run the development server:
+Samostatný projekt — nesdílí kód, databázi ani klíče s Monetiem (katalog mincí). Je z něj jen převzatý vzor stacku a designu.
+
+## Stack
+
+- Next.js 15 (App Router) + React 19 + TypeScript
+- Tailwind CSS 4
+- Supabase (Postgres, Auth, Storage) — vlastní projekt, viz `supabase/migrations`
+- Hosting: Vercel (nebo Cloudflare Pages)
+
+## Vývoj
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Otevři [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Supabase nastavení
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Založ nový Supabase projekt (samostatný, nesdílený s Monetiem).
+2. Zkopíruj `.env.local.example` do `.env.local` a doplň URL a klíče projektu.
+3. Spusť SQL migrace z `supabase/migrations` (v pořadí podle názvu) v SQL editoru Supabase.
+4. **Veřejné registrace zatím vypni** v Supabase dashboardu: Authentication → Providers/Settings → "Allow new users to sign up" (nebo ekvivalentní přepínač) → vypnout. Účet pro sebe si založíš ručně (Authentication → Users → Add user), dokud web není otevřený veřejnosti.
+5. Zapni Google OAuth provider (Authentication → Providers → Google) a doplň client ID/secret.
+6. Vytvoř privátní Storage bucket pro fotky (viz migrace) a ověř, že není veřejný.
 
-## Learn More
+## Poznámka k Monetiu
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Autografio z Monetia pouze čerpá inspiraci (stack, vzhled, vzory kódu — vždy zkopírované a upravené, nikdy linkované). Monetio zůstává nedotčené, běží ve vlastní složce se svým produkčním provozem.
