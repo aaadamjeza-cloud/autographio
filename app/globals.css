@@ -190,13 +190,23 @@ body {
 .hero-wrap::before {
   content: "";
   position: absolute;
-  top: -30px;
-  right: -8%;
-  width: 560px;
-  height: 560px;
+  top: -60px;
+  right: -6%;
+  width: 640px;
+  height: 640px;
   z-index: -1;
-  background: radial-gradient(circle, rgba(166, 49, 74, 0.1) 0%, transparent 68%);
-  filter: blur(50px);
+  background:
+    radial-gradient(circle at 60% 40%, rgba(166, 49, 74, 0.22) 0%, transparent 55%),
+    radial-gradient(circle at 40% 65%, rgba(224, 148, 74, 0.16) 0%, transparent 60%);
+  filter: blur(60px);
+}
+
+.hero-kicker {
+  font-family: var(--font-fraunces);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--ink-3);
+  margin: 0 0 6px;
 }
 
 .hero-grid {
@@ -237,7 +247,10 @@ body {
   margin: 0 0 20px;
   text-wrap: balance;
 }
-.hero-title span {
+.hero-title em {
+  font-family: var(--font-fraunces);
+  font-style: italic;
+  font-weight: 500;
   color: var(--accent);
 }
 

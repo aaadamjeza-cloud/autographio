@@ -16,8 +16,9 @@ export default function Home() {
                 <span className="hero-badge-dot" />
                 Zdarma pro sběratele
               </span>
+              <p className="hero-kicker">Tvoje sbírka, tvým tempem.</p>
               <h1 className="hero-title">
-                Sbírka autogramů, <span>konečně</span> na jednom místě
+                Sbírka autogramů, <em>konečně</em> na jednom místě
               </h1>
               <p className="hero-sub">
                 Zapisuj si kusy, které máš, sleduj odeslané žádosti o podpis a zjisti, jak dlouho se u které osobnosti
