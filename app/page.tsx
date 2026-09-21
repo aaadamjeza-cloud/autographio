@@ -10,9 +10,14 @@ export default function Home() {
       <p className="max-w-md text-lg" style={{ color: "var(--ink-2)" }}>
         Katalog osobností a soukromá evidence sbírky autogramů — ve výstavbě.
       </p>
-      <Link href="/prihlaseni" className="btn btn-primary">
-        Přihlásit se
-      </Link>
+      <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
+        <Link href="/osobnosti" className="btn btn-primary">
+          Katalog osobností
+        </Link>
+        <Link href="/prihlaseni" className="btn">
+          Přihlásit se
+        </Link>
+      </div>
     </main>
   );
 }
