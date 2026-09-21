@@ -1,36 +1,24 @@
 import Link from "next/link";
-import { SITE_NAME } from "@/lib/site";
+import Header from "@/components/Header";
 import PersonAvatar from "@/components/PersonAvatar";
 import { CATEGORY_LABELS, CATEGORY_COLORS, MOCK_PERSONS } from "@/lib/mockData/persons";
 
 export default function Home() {
   return (
     <>
-      <header className="hero-nav">
-        <div className="hero-nav-bar">
-          <Link href="/" className="hero-nav-name">
-            {SITE_NAME.toLowerCase()}
-          </Link>
-          <nav className="hero-nav-links">
-            <Link href="/osobnosti" className="hero-nav-link">
-              Osobnosti
-            </Link>
-            <Link href="/prihlaseni" className="btn">
-              Přihlásit se
-            </Link>
-          </nav>
-        </div>
-      </header>
+      <Header />
 
       <main className="page-content">
         <section className="hero-wrap">
           <div className="hero-grid">
             <div>
               <span className="hero-badge">
-                <span style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--success)", display: "inline-block" }} />
+                <span className="hero-badge-dot" />
                 Zdarma pro sběratele
               </span>
-              <h1 className="hero-title">Sbírka autogramů, konečně na jednom místě</h1>
+              <h1 className="hero-title">
+                Sbírka autogramů, <span>konečně</span> na jednom místě
+              </h1>
               <p className="hero-sub">
                 Zapisuj si kusy, které máš, sleduj odeslané žádosti o podpis a zjisti, jak dlouho se u které osobnosti
                 obvykle čeká — díky statistikám od ostatních sběratelů.

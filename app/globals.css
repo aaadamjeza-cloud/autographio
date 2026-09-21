@@ -21,7 +21,12 @@
   --ink-3: #71717a;
   --ink-muted: #a1a1aa;
 
-  --accent: #7f6a4a;
+  /* Signature accent — a deep garnet, distinct from Monetio's gold/pink/blue
+     trio, used sparingly (badge dot, active states, one highlighted stat,
+     hover underlines) so it reads as a deliberate brand color, not decoration
+     everywhere. */
+  --accent: #a6314a;
+  --accent-tint: #fbeef1;
   --success: #16a34a;
   --danger: #a32d2d;
 
@@ -127,10 +132,13 @@ body {
   transition: border-color 0.15s;
 }
 .field-input:focus {
-  border-color: var(--ink);
+  border-color: var(--accent);
 }
 
-/* ── Landing / hero ── */
+/* ── Landing / hero — same clean, bold-sans "Apple SaaS" language as
+   Monetio (white ground, pill buttons, tight tracking), differentiated by
+   one signature accent color used deliberately: the badge dot, the active
+   filter, one highlighted stat, link hovers — not scattered everywhere. ── */
 .hero-nav {
   position: sticky;
   top: 0;
@@ -170,28 +178,25 @@ body {
   transition: color 0.15s;
 }
 .hero-nav-link:hover {
-  color: var(--ink);
+  color: var(--accent);
 }
 
 .hero-wrap {
   max-width: 1180px;
   margin: 0 auto;
-  padding: 64px 32px 40px;
+  padding: 72px 32px 48px;
   position: relative;
 }
 .hero-wrap::before {
   content: "";
   position: absolute;
-  top: -40px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100vw;
-  height: 320px;
+  top: -30px;
+  right: -8%;
+  width: 560px;
+  height: 560px;
   z-index: -1;
-  background:
-    radial-gradient(ellipse at 15% 20%, rgba(127, 119, 221, 0.35) 0%, transparent 60%),
-    radial-gradient(ellipse at 85% 10%, rgba(216, 90, 48, 0.3) 0%, transparent 60%);
-  filter: blur(70px);
+  background: radial-gradient(circle, rgba(166, 49, 74, 0.1) 0%, transparent 68%);
+  filter: blur(50px);
 }
 
 .hero-grid {
@@ -212,8 +217,15 @@ body {
   color: var(--ink-2);
   border: 1px solid var(--line-strong);
   border-radius: var(--radius-pill);
-  padding: 6px 16px;
+  padding: 6px 16px 6px 12px;
   margin-bottom: 24px;
+}
+.hero-badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: inline-block;
 }
 
 .hero-title {
@@ -224,6 +236,9 @@ body {
   color: var(--ink);
   margin: 0 0 20px;
   text-wrap: balance;
+}
+.hero-title span {
+  color: var(--accent);
 }
 
 .hero-sub {
@@ -245,7 +260,7 @@ body {
   margin-bottom: 32px;
 }
 .hero-stats b {
-  color: var(--success);
+  color: var(--accent);
   font-weight: 800;
 }
 
@@ -317,8 +332,8 @@ body {
   font-weight: 800;
   padding: 3px 10px;
   border-radius: var(--radius-pill);
-  background: #f0fdf4;
-  color: var(--success);
+  background: var(--accent-tint);
+  color: var(--accent);
 }
 
 .strip-section {
@@ -354,19 +369,23 @@ body {
     grid-template-columns: 1fr;
   }
   .hero-title {
-    font-size: 40px;
+    font-size: 42px;
   }
   .hero-nav-links {
     gap: 16px;
+  }
+  .hero-wrap::before {
+    width: 400px;
+    height: 400px;
   }
 }
 
 @media (max-width: 560px) {
   .hero-wrap {
-    padding: 32px 20px 24px;
+    padding: 40px 20px 24px;
   }
   .hero-title {
-    font-size: 32px;
+    font-size: 34px;
   }
   .hero-sub {
     font-size: 15px;
@@ -416,7 +435,7 @@ body {
   transition: border-color 0.15s;
 }
 .persons-search:focus {
-  border-color: var(--ink);
+  border-color: var(--accent);
 }
 
 .persons-tabs {
@@ -443,8 +462,8 @@ body {
 }
 .persons-tab.active {
   color: #fff;
-  background: var(--ink);
-  border-color: var(--ink);
+  background: var(--accent);
+  border-color: var(--accent);
 }
 
 .persons-count {
