@@ -21,12 +21,12 @@
   --ink-3: #71717a;
   --ink-muted: #a1a1aa;
 
-  /* Signature accent — a deep garnet, distinct from Monetio's gold/pink/blue
-     trio, used sparingly (badge dot, active states, one highlighted stat,
-     hover underlines) so it reads as a deliberate brand color, not decoration
-     everywhere. */
-  --accent: #a6314a;
-  --accent-tint: #fbeef1;
+  /* Signature accent — a deep fountain-pen ink blue, thematically tied to
+     signing your name, used sparingly (badge dot, active states, one
+     highlighted stat, hover underlines) so it reads as a deliberate brand
+     color, not decoration everywhere. */
+  --accent: #24467a;
+  --accent-tint: #eef1f8;
   --success: #16a34a;
   --danger: #a32d2d;
 
@@ -196,8 +196,8 @@ body {
   height: 640px;
   z-index: -1;
   background:
-    radial-gradient(circle at 60% 40%, rgba(166, 49, 74, 0.22) 0%, transparent 55%),
-    radial-gradient(circle at 40% 65%, rgba(224, 148, 74, 0.16) 0%, transparent 60%);
+    radial-gradient(circle at 60% 40%, rgba(36, 70, 122, 0.2) 0%, transparent 55%),
+    radial-gradient(circle at 40% 65%, rgba(88, 130, 180, 0.14) 0%, transparent 60%);
   filter: blur(60px);
 }
 
