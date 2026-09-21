@@ -1,23 +1,109 @@
 import Link from "next/link";
 import { SITE_NAME } from "@/lib/site";
+import PersonAvatar from "@/components/PersonAvatar";
+import { CATEGORY_LABELS, CATEGORY_COLORS, MOCK_PERSONS } from "@/lib/mockData/persons";
 
 export default function Home() {
   return (
-    <main className="flex flex-1 flex-col items-center justify-center gap-6 px-6 py-24 text-center">
-      <h1 className="text-4xl font-black tracking-tight" style={{ color: "var(--ink)" }}>
-        {SITE_NAME}
-      </h1>
-      <p className="max-w-md text-lg" style={{ color: "var(--ink-2)" }}>
-        Katalog osobností a soukromá evidence sbírky autogramů — ve výstavbě.
-      </p>
-      <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
-        <Link href="/osobnosti" className="btn btn-primary">
-          Katalog osobností
-        </Link>
-        <Link href="/prihlaseni" className="btn">
-          Přihlásit se
-        </Link>
-      </div>
-    </main>
+    <>
+      <header className="hero-nav">
+        <div className="hero-nav-bar">
+          <Link href="/" className="hero-nav-name">
+            {SITE_NAME.toLowerCase()}
+          </Link>
+          <nav className="hero-nav-links">
+            <Link href="/osobnosti" className="hero-nav-link">
+              Osobnosti
+            </Link>
+            <Link href="/prihlaseni" className="btn">
+              Přihlásit se
+            </Link>
+          </nav>
+        </div>
+      </header>
+
+      <main className="page-content">
+        <section className="hero-wrap">
+          <div className="hero-grid">
+            <div>
+              <span className="hero-badge">
+                <span style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--success)", display: "inline-block" }} />
+                Zdarma pro sběratele
+              </span>
+              <h1 className="hero-title">Sbírka autogramů, konečně na jednom místě</h1>
+              <p className="hero-sub">
+                Zapisuj si kusy, které máš, sleduj odeslané žádosti o podpis a zjisti, jak dlouho se u které osobnosti
+                obvykle čeká — díky statistikám od ostatních sběratelů.
+              </p>
+              <div className="hero-stats">
+                <span>
+                  <b>{MOCK_PERSONS.length}+</b> osobností v katalogu
+                </span>
+                <span>Sledování žádostí o podpis</span>
+                <span>Soukromá sbírka, veřejné jen to, co chceš</span>
+              </div>
+              <div className="hero-ctas">
+                <Link href="/prihlaseni" className="btn btn-primary hero-cta-primary">
+                  Začít sbírat
+                </Link>
+                <Link href="/osobnosti" className="btn hero-cta-primary">
+                  Projít katalog
+                </Link>
+              </div>
+            </div>
+
+            <div className="showcase-card">
+              <div className="showcase-head">
+                <PersonAvatar name="Zdeněk Svěrák" category="herec" size={52} />
+                <div>
+                  <p className="showcase-title">Podpis — Zdeněk Svěrák</p>
+                  <p className="showcase-subtitle">Fotka · osobně získáno</p>
+                </div>
+              </div>
+              <div className="showcase-rows">
+                <div className="showcase-row">
+                  <span className="showcase-row-label">Kupní cena</span>
+                  <span className="showcase-row-value">400 Kč</span>
+                </div>
+                <div className="showcase-row">
+                  <span className="showcase-row-label">Odhad hodnoty</span>
+                  <span className="showcase-row-value">650 Kč</span>
+                </div>
+                <div className="showcase-row">
+                  <span className="showcase-row-label">Zisk / ztráta</span>
+                  <span className="showcase-row-value positive">+250 Kč</span>
+                </div>
+              </div>
+              <div style={{ marginTop: 16, display: "flex", justifyContent: "center" }}>
+                <span className="showcase-badge">Ukázka — bez přihlášení</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="strip-section">
+          <p className="strip-label">Osobnosti v katalogu</p>
+          <div className="strip-row">
+            {MOCK_PERSONS.map((p) => (
+              <Link key={p.slug} href={`/osobnosti/${p.slug}`} className="person-card strip-card">
+                <PersonAvatar name={p.name} category={p.category} size={56} />
+                <div>
+                  <p className="person-card-name" style={{ fontSize: 13 }}>
+                    {p.name}
+                  </p>
+                  <p className="person-card-years">
+                    {p.birthYear}
+                    {p.deathYear ? `–${p.deathYear}` : ""}
+                  </p>
+                </div>
+                <span className="person-badge" style={{ background: CATEGORY_COLORS[p.category] }}>
+                  {CATEGORY_LABELS[p.category]}
+                </span>
+              </Link>
+            ))}
+          </div>
+        </section>
+      </main>
+    </>
   );
 }
