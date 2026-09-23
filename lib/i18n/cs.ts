@@ -88,6 +88,13 @@ const cs: Dictionary = {
     deleteAccount: "Smazat účet",
     deleteAccountWarning: "Tato akce nevratně smaže účet, sbírku i nahrané fotky.",
   },
+  films: {
+    title: "Filmy",
+    search: "Hledat film…",
+    director: "Režie",
+    cast: "Obsazení",
+    year: "Rok",
+  },
   photoPicker: {
     addPhoto: "Přidat fotku",
     changePhoto: "Změnit fotku",

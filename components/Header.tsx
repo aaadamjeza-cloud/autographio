@@ -36,6 +36,9 @@ export default function Header() {
           <Link href="/osobnosti" className="hero-nav-link">
             {t.persons.title}
           </Link>
+          <Link href="/filmy" className="hero-nav-link">
+            {t.films.title}
+          </Link>
           {loggedIn && (
             <Link href="/moje-sbirka/pridat" className="hero-nav-link">
               {t.collection.addItem}

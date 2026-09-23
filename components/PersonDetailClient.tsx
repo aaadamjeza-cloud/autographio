@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import PersonPortrait from "@/components/PersonPortrait";
 import PriceHistoryChart from "@/components/PriceHistoryChart";
 import { CATEGORY_LABELS, type MockPerson } from "@/lib/mockData/persons";
+import { findMockFilmByTitle } from "@/lib/mockData/films";
 import { formatKc } from "@/lib/format";
 import t from "@/lib/i18n";
 
@@ -81,15 +83,24 @@ export default function PersonDetailClient({ person }: { person: MockPerson }) {
           <section style={{ marginTop: 32 }}>
             <h2 className="person-section-title">{t.persons.filmography}</h2>
             <ul className="person-filmography">
-              {person.filmography.map((film, i) => (
-                <li key={`${film.year}-${film.title}-${i}`}>
-                  <span className="person-filmography-year">{film.year}</span>
-                  <span>
-                    {film.title}
-                    {film.note ? ` (${film.note})` : ""}
-                  </span>
-                </li>
-              ))}
+              {person.filmography.map((film, i) => {
+                const matchedFilm = findMockFilmByTitle(film.title);
+                return (
+                  <li key={`${film.year}-${film.title}-${i}`}>
+                    <span className="person-filmography-year">{film.year}</span>
+                    <span>
+                      {matchedFilm ? (
+                        <Link href={`/filmy/${matchedFilm.slug}`} className="film-cast-link">
+                          {film.title}
+                        </Link>
+                      ) : (
+                        film.title
+                      )}
+                      {film.note ? ` (${film.note})` : ""}
+                    </span>
+                  </li>
+                );
+              })}
             </ul>
           </section>
         )}

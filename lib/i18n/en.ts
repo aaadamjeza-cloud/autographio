@@ -87,6 +87,13 @@ const en: Dictionary = {
     deleteAccount: "Delete account",
     deleteAccountWarning: "This permanently deletes your account, collection, and uploaded photos.",
   },
+  films: {
+    title: "Films",
+    search: "Search a film…",
+    director: "Director",
+    cast: "Cast",
+    year: "Year",
+  },
   photoPicker: {
     addPhoto: "Add photo",
     changePhoto: "Change photo",

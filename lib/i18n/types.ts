@@ -82,6 +82,13 @@ export interface Dictionary {
     deleteAccount: string;
     deleteAccountWarning: string;
   };
+  films: {
+    title: string;
+    search: string;
+    director: string;
+    cast: string;
+    year: string;
+  };
   photoPicker: {
     addPhoto: string;
     changePhoto: string;
