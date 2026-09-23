@@ -65,6 +65,20 @@ body {
   font-feature-settings: "tnum", "ss01", "cv02";
 }
 
+/* body is a column flex container (sticky footer) — every page's <main
+   className="page-content" style={{maxWidth, margin: "0 auto", ...}}> is
+   therefore a flex item, and a flex item with auto side margins shrinks to
+   its content's width instead of filling the cross axis (auto margins
+   consume the stretch). Without an explicit width, that starves any
+   auto-fill/auto-fit grid inside it down to a single column, since the
+   grid has no real available width to divide — it and its shrink-wrapped
+   parent settle into the smallest stable (one-column) size together. This
+   forces the normal block-centering behavior (fill, then cap at max-width)
+   instead. */
+.page-content {
+  width: 100%;
+}
+
 .btn {
   font: inherit;
   font-size: 15px;
@@ -639,13 +653,65 @@ body {
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 20px;
-  padding: 20px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 4px;
   text-decoration: none;
   box-shadow: var(--shadow);
   transition: box-shadow 0.18s, transform 0.18s;
+}
+
+.film-poster-tile {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+.film-poster-placeholder {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 12px;
+  border: 1.5px dashed var(--line-strong);
+  border-radius: 14px;
+  background: var(--panel-2);
+}
+.film-poster-placeholder span {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-muted);
+}
+
+.film-detail-head {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.film-poster-wide {
+  flex: 0 0 180px;
+  width: 180px;
+}
+
+@media (max-width: 560px) {
+  .film-detail-head {
+    flex-direction: column;
+  }
+  .film-poster-wide {
+    flex-basis: auto;
+    width: 140px;
+  }
 }
 .film-card:hover {
   box-shadow: var(--shadow-hover);
