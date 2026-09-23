@@ -93,6 +93,7 @@ const en: Dictionary = {
     director: "Director",
     cast: "Cast",
     year: "Year",
+    funFact: "Fun fact",
   },
   photoPicker: {
     addPhoto: "Add photo",

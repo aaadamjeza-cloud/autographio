@@ -88,6 +88,7 @@ export interface Dictionary {
     director: string;
     cast: string;
     year: string;
+    funFact: string;
   };
   photoPicker: {
     addPhoto: string;

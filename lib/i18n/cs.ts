@@ -94,6 +94,7 @@ const cs: Dictionary = {
     director: "Režie",
     cast: "Obsazení",
     year: "Rok",
+    funFact: "Zajímavost",
   },
   photoPicker: {
     addPhoto: "Přidat fotku",

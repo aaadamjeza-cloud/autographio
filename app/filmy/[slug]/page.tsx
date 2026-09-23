@@ -34,6 +34,13 @@ export default async function FilmDetailPage({ params }: { params: Promise<{ slu
           </p>
         )}
 
+        {film.funFact && (
+          <section style={{ marginBottom: 32 }}>
+            <h2 className="person-section-title">{t.films.funFact}</h2>
+            <p className="person-section-text">{film.funFact}</p>
+          </section>
+        )}
+
         <section>
           <h2 className="person-section-title">{t.films.cast}</h2>
           <ul className="person-filmography" style={{ marginTop: 8 }}>
