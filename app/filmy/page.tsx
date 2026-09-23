@@ -38,7 +38,7 @@ export default function FilmsPage() {
           {filtered.length === 0 && <p className="persons-empty">Žádný film neodpovídá hledání.</p>}
           {filtered.map((f) => (
             <Link key={f.slug} href={`/filmy/${f.slug}`} className="film-card">
-              <FilmPoster slug={f.slug} title={f.title} year={f.year} topCast={f.cast.slice(0, 3).map((c) => c.name)} />
+              <FilmPoster slug={f.slug} title={f.title} originalTitle={f.originalTitle} />
               <p className="film-card-year">{f.year}</p>
               <p className="film-card-title">{f.title}</p>
               <p className="film-card-director">

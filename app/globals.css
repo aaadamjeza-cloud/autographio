@@ -684,7 +684,6 @@ body {
   justify-content: center;
   text-align: center;
   padding: 18px 14px;
-  gap: 8px;
   border-radius: 14px;
   overflow: hidden;
 }
@@ -692,34 +691,36 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(circle at 25% 15%, rgba(255, 255, 255, 0.3), transparent 55%),
-    linear-gradient(200deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.25) 100%);
+  background: radial-gradient(circle at 30% 12%, rgba(255, 255, 255, 0.35), transparent 55%);
   pointer-events: none;
 }
-.film-poster-placeholder-year {
+.film-poster-placeholder-logo {
   position: relative;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.75);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-family: Impact, "Arial Narrow Bold", "Helvetica Neue", sans-serif;
 }
-.film-poster-placeholder-title {
-  position: relative;
-  font-size: 19px;
+
+.film-poster-placeholder-lead {
+  font-size: 23px;
   font-weight: 900;
-  letter-spacing: -0.015em;
-  line-height: 1.18;
+  letter-spacing: 0.01em;
+  line-height: 0.95;
   color: #fff;
+  text-shadow: 1.5px 1.5px 0 #09090b, 3px 3px 0 #09090b;
   text-wrap: balance;
 }
-.film-poster-placeholder-cast {
-  position: relative;
-  font-size: 10.5px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.8);
-  line-height: 1.5;
+
+.film-poster-placeholder-rest {
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.015em;
+  line-height: 1.2;
+  color: #fff;
+  text-shadow: 1px 1px 0 #09090b, 2px 2px 0 #09090b;
+  text-wrap: balance;
 }
 
 .film-detail-head {

@@ -13,6 +13,7 @@ export type FilmCastMember = {
 export type MockFilm = {
   slug: string;
   title: string;
+  originalTitle: string;
   year: number;
   director: string;
   writers: string;
@@ -27,6 +28,7 @@ export const MOCK_FILMS: MockFilm[] = [
   {
     slug: "cetnik-ze-saint-tropez",
     title: "Četník ze Saint Tropez",
+    originalTitle: "Le Gendarme de Saint-Tropez",
     year: 1964,
     director: "Jean Girault",
     writers: "Richard Balducci, Jacques Vilfrid, Jean Girault",
@@ -77,6 +79,7 @@ export const MOCK_FILMS: MockFilm[] = [
   {
     slug: "cetnik-v-new-yorku",
     title: "Četník v New Yorku",
+    originalTitle: "Le Gendarme à New York",
     year: 1965,
     director: "Jean Girault",
     writers: "Jean Girault, Jacques Vilfrid (na námět Richarda Balducciho)",
@@ -127,6 +130,7 @@ export const MOCK_FILMS: MockFilm[] = [
   {
     slug: "cetnik-se-zeni",
     title: "Četník se žení",
+    originalTitle: "Le Gendarme se marie",
     year: 1968,
     director: "Jean Girault",
     writers: "Jean Girault, Jacques Vilfrid (na námět Richarda Balducciho)",
@@ -172,6 +176,7 @@ export const MOCK_FILMS: MockFilm[] = [
   {
     slug: "cetnik-a-mimozemstane",
     title: "Četník a mimozemšťané",
+    originalTitle: "Le Gendarme et les Extra-terrestres",
     year: 1979,
     director: "Jean Girault",
     writers: "Jacques Vilfrid, Jean Girault, Louis de Funès, Gérard Beytout",
@@ -213,6 +218,7 @@ export const MOCK_FILMS: MockFilm[] = [
   {
     slug: "cetnik-a-cetnice",
     title: "Četník a četnice",
+    originalTitle: "Le Gendarme et les Gendarmettes",
     year: 1982,
     director: "Jean Girault",
     writers: "Jacques Vilfrid, Jean Girault, Gérard Beytout",

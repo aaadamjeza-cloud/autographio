@@ -17,7 +17,7 @@ export default async function FilmDetailPage({ params }: { params: Promise<{ slu
       <main className="page-content" style={{ maxWidth: 720, margin: "0 auto", padding: "32px 24px 80px" }}>
         <div className="film-detail-head">
           <div className="film-poster-wide">
-            <FilmPoster slug={film.slug} title={film.title} year={film.year} topCast={film.cast.slice(0, 3).map((c) => c.name)} />
+            <FilmPoster slug={film.slug} title={film.title} originalTitle={film.originalTitle} />
           </div>
           <div>
             <p className="person-detail-meta" style={{ marginBottom: 6 }}>
