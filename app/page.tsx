@@ -82,7 +82,14 @@ export default function Home() {
           <div className="strip-row">
             {MOCK_PERSONS.map((p) => (
               <Link key={p.slug} href={`/osobnosti/${p.slug}`} className="person-card strip-card">
-                <PersonPortrait slug={p.slug} storageKey={`${p.slug}:profile`} name={p.name} category={p.category} size={56} />
+                <PersonPortrait
+                  slug={p.slug}
+                  storageKey={`${p.slug}:profile`}
+                  name={p.name}
+                  category={p.category}
+                  size={56}
+                  showRemove={false}
+                />
                 <div>
                   <p className="person-card-name" style={{ fontSize: 13 }}>
                     {p.name}

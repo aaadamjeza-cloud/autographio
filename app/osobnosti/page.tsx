@@ -81,7 +81,13 @@ export default function PersonsPage() {
           {filtered.length === 0 && <p className="persons-empty">Žádná osobnost neodpovídá hledání.</p>}
           {filtered.map((p) => (
             <Link key={p.slug} href={`/osobnosti/${p.slug}`} className="person-card">
-              <PersonPortrait slug={p.slug} storageKey={`${p.slug}:profile`} name={p.name} category={p.category} />
+              <PersonPortrait
+                slug={p.slug}
+                storageKey={`${p.slug}:profile`}
+                name={p.name}
+                category={p.category}
+                showRemove={false}
+              />
               <div>
                 <p className="person-card-name">{p.name}</p>
                 <p className="person-card-years">
