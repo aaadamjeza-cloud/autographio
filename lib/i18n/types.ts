@@ -86,6 +86,8 @@ export interface Dictionary {
     title: string;
     search: string;
     director: string;
+    writers: string;
+    production: string;
     cast: string;
     year: string;
     funFact: string;

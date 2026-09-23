@@ -680,6 +680,47 @@ body {
   text-decoration: underline;
 }
 
+.film-cast-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 6px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 420px;
+  overflow-y: auto;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--panel-2);
+}
+
+.film-cast-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 13px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+.film-cast-item:last-child {
+  border-bottom: none;
+}
+
+.film-cast-name {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.film-cast-role {
+  color: var(--ink-3);
+  font-size: 12.5px;
+}
+.film-cast-role::before {
+  content: "— ";
+  color: var(--ink-muted);
+}
+
 /* ── Osobnosti (katalog) ── */
 .persons-toolbar {
   display: flex;

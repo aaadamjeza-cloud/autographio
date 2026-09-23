@@ -21,7 +21,7 @@ export default async function FilmDetailPage({ params }: { params: Promise<{ slu
           {film.title}
         </h1>
         <p className="person-detail-meta" style={{ marginBottom: 24 }}>
-          {t.films.director}: {film.director}
+          {t.films.director}: {film.director} · {t.films.writers}: {film.writers}
         </p>
 
         <p className="person-section-text" style={{ marginBottom: 24 }}>
@@ -34,6 +34,13 @@ export default async function FilmDetailPage({ params }: { params: Promise<{ slu
           </p>
         )}
 
+        {film.production && (
+          <section style={{ marginBottom: 32 }}>
+            <h2 className="person-section-title">{t.films.production}</h2>
+            <p className="person-section-text">{film.production}</p>
+          </section>
+        )}
+
         {film.funFact && (
           <section style={{ marginBottom: 32 }}>
             <h2 className="person-section-title">{t.films.funFact}</h2>
@@ -42,19 +49,22 @@ export default async function FilmDetailPage({ params }: { params: Promise<{ slu
         )}
 
         <section>
-          <h2 className="person-section-title">{t.films.cast}</h2>
-          <ul className="person-filmography" style={{ marginTop: 8 }}>
-            {film.cast.map((name) => {
-              const person = MOCK_PERSONS.find((p) => p.name === name);
+          <h2 className="person-section-title">
+            {t.films.cast} <span style={{ color: "var(--ink-muted)", fontWeight: 600 }}>({film.cast.length})</span>
+          </h2>
+          <ul className="film-cast-list">
+            {film.cast.map((member) => {
+              const person = MOCK_PERSONS.find((p) => p.name === member.name);
               return (
-                <li key={name}>
+                <li key={member.name} className="film-cast-item">
                   {person ? (
                     <Link href={`/osobnosti/${person.slug}`} className="film-cast-link">
-                      {name}
+                      {member.name}
                     </Link>
                   ) : (
-                    <span>{name}</span>
+                    <span className="film-cast-name">{member.name}</span>
                   )}
+                  {member.role && <span className="film-cast-role">{member.role}</span>}
                 </li>
               );
             })}

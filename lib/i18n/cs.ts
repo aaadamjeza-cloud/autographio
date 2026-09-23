@@ -92,6 +92,8 @@ const cs: Dictionary = {
     title: "Filmy",
     search: "Hledat film…",
     director: "Režie",
+    writers: "Scénář",
+    production: "O natáčení",
     cast: "Obsazení",
     year: "Rok",
     funFact: "Zajímavost",

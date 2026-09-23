@@ -42,6 +42,9 @@ export default function FilmsPage() {
               <p className="film-card-director">
                 {t.films.director}: {f.director}
               </p>
+              <p className="film-card-director">
+                {t.films.cast}: {f.cast.length}
+              </p>
             </Link>
           ))}
         </div>

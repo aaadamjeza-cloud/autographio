@@ -91,6 +91,8 @@ const en: Dictionary = {
     title: "Films",
     search: "Search a film…",
     director: "Director",
+    writers: "Screenplay",
+    production: "Production",
     cast: "Cast",
     year: "Year",
     funFact: "Fun fact",
