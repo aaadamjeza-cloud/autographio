@@ -48,14 +48,14 @@ export default function PriceHistoryChart({ data }: { data: PriceHistoryPoint[] 
         </defs>
         <path d={areaPath} fill="url(#price-history-fill)" stroke="none" />
         <path d={linePath} fill="none" stroke="var(--accent)" strokeWidth={2.5} />
-        {points.map((p) => (
-          <circle key={p.year} cx={p.x} cy={p.y} r={5} fill="var(--accent)" stroke="var(--panel)" strokeWidth={2} />
+        {points.map((p, i) => (
+          <circle key={i} cx={p.x} cy={p.y} r={5} fill="var(--accent)" stroke="var(--panel)" strokeWidth={2} />
         ))}
       </svg>
 
       <div className="price-history-labels">
-        {points.map((p) => (
-          <div key={p.year} className="price-history-label">
+        {points.map((p, i) => (
+          <div key={i} className="price-history-label">
             <span className="price-history-label-year">{p.year}</span>
             <span className="price-history-label-price">{formatKc(p.price)}</span>
           </div>

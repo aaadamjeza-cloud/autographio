@@ -19,6 +19,9 @@ const en: Dictionary = {
     loginSubtitle: "Welcome back to Autografio.",
     continueWithGoogle: "Continue with Google",
     logout: "Log out",
+    email: "Email",
+    password: "Password",
+    loginError: "Couldn't log in. Check your email and password.",
   },
   onboarding: {
     displayNameTitle: "How should others see you?",
@@ -35,6 +38,9 @@ const en: Dictionary = {
     totalEstimated: "Total estimated value",
     profitLoss: "Profit / loss",
     addItem: "Add item",
+    personNameLabel: "Person's name",
+    personNamePlaceholder: "E.g. Louis de Funès",
+    createItemError: "Couldn't create the item.",
   },
   itemType: {
     autograph: "Autograph",
@@ -59,6 +65,7 @@ const en: Dictionary = {
     photoPlaceholder: "No photo uploaded yet",
     priceHistory: "Price history",
     verifiedSales: "Verified sales",
+    source: "Source",
   },
   requests: {
     title: "My requests",
@@ -86,9 +93,15 @@ const en: Dictionary = {
     limitHint: "Up to 5 photos per item. Resized to 1200px and converted to WebP right in your browser.",
     limitReached: "5-photo limit reached.",
     processing: "Processing…",
+    uploading: "Uploading…",
+    removing: "Removing…",
     remove: "Remove",
     tooLarge: "File is too large (max 20 MB).",
     notAnImage: "That's not an image.",
+    uploadError: "Upload failed.",
+    saveError: "Couldn't save even after freeing space — browser storage is likely disabled (e.g. private browsing).",
+    clearCache: "Clear cached person photos",
+    clearCacheConfirm: "Delete all locally cached person photos and profile pictures in this browser? You can upload them again per person afterwards.",
   },
 };
 

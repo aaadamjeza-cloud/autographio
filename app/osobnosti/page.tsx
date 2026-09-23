@@ -5,6 +5,21 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import PersonPortrait from "@/components/PersonPortrait";
 import { CATEGORY_LABELS, CATEGORY_COLORS, MOCK_PERSONS, type PersonCategory } from "@/lib/mockData/persons";
+import { formatKc } from "@/lib/format";
+import t from "@/lib/i18n";
+
+const PORTRAIT_PREFIX = "autografio:portrait:";
+
+function clearCachedPortraits() {
+  if (!window.confirm(t.photoPicker.clearCacheConfirm)) return;
+  const keys: string[] = [];
+  for (let i = 0; i < window.localStorage.length; i++) {
+    const k = window.localStorage.key(i);
+    if (k?.startsWith(PORTRAIT_PREFIX)) keys.push(k);
+  }
+  keys.forEach((k) => window.localStorage.removeItem(k));
+  window.location.reload();
+}
 
 const TABS: Array<{ key: PersonCategory | "all"; label: string }> = [
   { key: "all", label: "Vše" },
@@ -55,13 +70,18 @@ export default function PersonsPage() {
           </div>
         </div>
 
-        <p className="persons-count">{filtered.length} osobností</p>
+        <div className="persons-count-row" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
+          <p className="persons-count">{filtered.length} osobností</p>
+          <button type="button" className="persons-clear-cache-btn" onClick={clearCachedPortraits}>
+            {t.photoPicker.clearCache}
+          </button>
+        </div>
 
         <div className="persons-grid">
           {filtered.length === 0 && <p className="persons-empty">Žádná osobnost neodpovídá hledání.</p>}
           {filtered.map((p) => (
             <Link key={p.slug} href={`/osobnosti/${p.slug}`} className="person-card">
-              <PersonPortrait slug={p.slug} name={p.name} category={p.category} />
+              <PersonPortrait slug={p.slug} storageKey={`${p.slug}:profile`} name={p.name} category={p.category} />
               <div>
                 <p className="person-card-name">{p.name}</p>
                 <p className="person-card-years">
@@ -70,7 +90,9 @@ export default function PersonsPage() {
                 </p>
               </div>
               <span className="person-badge" style={{ background: CATEGORY_COLORS[p.category] }}>
-                {CATEGORY_LABELS[p.category]}
+                {p.marketPriceMin != null && p.marketPriceMax != null
+                  ? formatKc((p.marketPriceMin + p.marketPriceMax) / 2)
+                  : CATEGORY_LABELS[p.category]}
               </span>
             </Link>
           ))}

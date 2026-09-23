@@ -15,6 +15,9 @@ export interface Dictionary {
     loginSubtitle: string;
     continueWithGoogle: string;
     logout: string;
+    email: string;
+    password: string;
+    loginError: string;
   };
   onboarding: {
     displayNameTitle: string;
@@ -30,6 +33,9 @@ export interface Dictionary {
     totalEstimated: string;
     profitLoss: string;
     addItem: string;
+    personNameLabel: string;
+    personNamePlaceholder: string;
+    createItemError: string;
   };
   itemType: {
     autograph: string;
@@ -54,6 +60,7 @@ export interface Dictionary {
     photoPlaceholder: string;
     priceHistory: string;
     verifiedSales: string;
+    source: string;
   };
   requests: {
     title: string;
@@ -81,8 +88,14 @@ export interface Dictionary {
     limitHint: string;
     limitReached: string;
     processing: string;
+    uploading: string;
+    removing: string;
     remove: string;
     tooLarge: string;
     notAnImage: string;
+    uploadError: string;
+    saveError: string;
+    clearCache: string;
+    clearCacheConfirm: string;
   };
 }

@@ -14,9 +14,19 @@ const MIN_QUALITY = 0.5;
 // Resizes + re-encodes an image entirely client-side (canvas), which both
 // shrinks it and strips EXIF (GPS included) — canvas re-encoding never
 // preserves EXIF, so no separate "strip metadata" step is needed.
-export async function resizeImageToWebp(file: File): Promise<ResizedPhoto> {
+// Options let callers that persist the result somewhere space-constrained
+// (e.g. PersonPortrait's localStorage cache) ask for a smaller target than
+// the default — PhotoPicker's real Supabase Storage uploads have no such
+// constraint and keep using the roomier defaults.
+export async function resizeImageToWebp(
+  file: File,
+  options?: { maxDimension?: number; targetBytes?: number }
+): Promise<ResizedPhoto> {
+  const maxDimension = options?.maxDimension ?? MAX_DIMENSION;
+  const targetBytes = options?.targetBytes ?? TARGET_BYTES;
+
   const bitmap = await loadBitmap(file);
-  const scale = Math.min(1, MAX_DIMENSION / Math.max(bitmap.width, bitmap.height));
+  const scale = Math.min(1, maxDimension / Math.max(bitmap.width, bitmap.height));
   const width = Math.round(bitmap.width * scale);
   const height = Math.round(bitmap.height * scale);
 
@@ -30,7 +40,7 @@ export async function resizeImageToWebp(file: File): Promise<ResizedPhoto> {
 
   let quality = 0.82;
   let blob = await canvasToBlob(canvas, quality);
-  while (blob && blob.size > TARGET_BYTES && quality > MIN_QUALITY) {
+  while (blob && blob.size > targetBytes && quality > MIN_QUALITY) {
     quality -= 0.08;
     blob = await canvasToBlob(canvas, quality);
   }

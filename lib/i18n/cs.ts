@@ -20,6 +20,9 @@ const cs: Dictionary = {
     loginSubtitle: "Vítej zpět v Autografiu.",
     continueWithGoogle: "Pokračovat s Google",
     logout: "Odhlásit se",
+    email: "E-mail",
+    password: "Heslo",
+    loginError: "Nepodařilo se přihlásit. Zkontroluj e-mail a heslo.",
   },
   onboarding: {
     displayNameTitle: "Jak tě mají ostatní vidět?",
@@ -36,6 +39,9 @@ const cs: Dictionary = {
     totalEstimated: "Celkový odhad",
     profitLoss: "Zisk / ztráta",
     addItem: "Přidat kus",
+    personNameLabel: "Jméno osobnosti",
+    personNamePlaceholder: "Např. Louis de Funès",
+    createItemError: "Nepodařilo se založit kus.",
   },
   itemType: {
     autograph: "Podpis",
@@ -60,6 +66,7 @@ const cs: Dictionary = {
     photoPlaceholder: "Fotka zatím není nahraná",
     priceHistory: "Vývoj ceny",
     verifiedSales: "Doložené prodeje",
+    source: "Zdroj",
   },
   requests: {
     title: "Moje žádosti",
@@ -87,9 +94,15 @@ const cs: Dictionary = {
     limitHint: "Max 5 fotek na kus. Zmenší se na 1200 px a převedou do WebP přímo v prohlížeči.",
     limitReached: "Dosažen limit 5 fotek.",
     processing: "Zpracovávám…",
+    uploading: "Nahrávám…",
+    removing: "Odstraňuji…",
     remove: "Odebrat",
     tooLarge: "Soubor je moc velký (max 20 MB).",
     notAnImage: "Tohle není obrázek.",
+    uploadError: "Nahrání se nepovedlo.",
+    saveError: "Nepodařilo se uložit ani po uvolnění místa — úložiště prohlížeče je pravděpodobně vypnuté (např. soukromé prohlížení).",
+    clearCache: "Vymazat uložené fotky osobností",
+    clearCacheConfirm: "Smazat všechny lokálně uložené fotky a profilovky osobností v tomto prohlížeči? Fotky u jednotlivých osobností budeš moct nahrát znovu.",
   },
 };
 

@@ -1,30 +1,36 @@
+import { redirect } from "next/navigation";
 import Header from "@/components/Header";
-import PhotoPicker from "@/components/PhotoPicker";
+import AddItemForm from "@/components/AddItemForm";
+import { createServerSupabase } from "@/lib/supabase/server";
 import t from "@/lib/i18n";
 
-// Preview of the photo-handling step of "Add item" — the rest of the form
-// (person picker, prices, authentication) isn't built yet. This route sits
-// under /moje-sbirka on purpose: proxy.ts already gates that prefix behind
-// login, it just can't enforce it until a Supabase project exists.
-export default function AddItemPage() {
+export default async function AddItemPage({ searchParams }: { searchParams: Promise<{ item?: string }> }) {
+  const supabase = await createServerSupabase();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) redirect("/prihlaseni?next=/moje-sbirka/pridat");
+
+  const { item } = await searchParams;
+  let existingItem: { id: string; name: string } | null = null;
+  if (item) {
+    const { data } = await supabase
+      .from("portfolio_items")
+      .select("id, custom_person_name")
+      .eq("id", item)
+      .eq("user_id", user.id)
+      .maybeSingle();
+    if (data) existingItem = { id: data.id, name: data.custom_person_name ?? "" };
+  }
+
   return (
     <>
       <Header />
       <main className="page-content" style={{ maxWidth: 640, margin: "0 auto", padding: "32px 24px 80px" }}>
-        <h1 style={{ fontSize: 28, fontWeight: 900, letterSpacing: "-0.02em", color: "var(--ink)", marginBottom: 8 }}>
+        <h1 style={{ fontSize: 28, fontWeight: 900, letterSpacing: "-0.02em", color: "var(--ink)", marginBottom: 28 }}>
           {t.collection.addItem}
         </h1>
-        <p style={{ fontSize: 14, color: "var(--ink-3)", marginBottom: 28 }}>
-          Ukázka jen fotek — vyber si libovolnou fotku z počítače, uvidíš přesně to zmenšení a náhled, co půjde do
-          appky. Zatím se nikam trvale neukládá (chybí Supabase Storage).
-        </p>
-
-        <div className="card" style={{ padding: 24 }}>
-          <p className="field-label" style={{ marginBottom: 12, display: "block" }}>
-            Fotky kusu
-          </p>
-          <PhotoPicker />
-        </div>
+        <AddItemForm userId={user.id} initialItemId={existingItem?.id} initialPersonName={existingItem?.name} />
       </main>
     </>
   );

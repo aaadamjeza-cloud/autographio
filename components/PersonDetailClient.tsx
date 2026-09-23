@@ -25,7 +25,11 @@ export default function PersonDetailClient({ person }: { person: MockPerson }) {
             {person.deathYear ? `–${person.deathYear}` : " – dosud"}
           </p>
 
-          {person.marketPrice != null && <p className="person-detail-price">{formatKc(person.marketPrice)}</p>}
+          {person.marketPriceMin != null && person.marketPriceMax != null && (
+            <p className="person-detail-price">
+              {formatKc(person.marketPriceMin)} – {formatKc(person.marketPriceMax)}
+            </p>
+          )}
 
           {saleListings.length > 0 && (
             <button type="button" className="person-sales-btn" onClick={() => setSalesOpen(true)}>
@@ -39,6 +43,16 @@ export default function PersonDetailClient({ person }: { person: MockPerson }) {
       <div className="person-content">
         {person.bio && (
           <section style={{ marginTop: 40 }}>
+            <div className="person-profile-pick">
+              <PersonPortrait
+                slug={person.slug}
+                storageKey={`${person.slug}:profile`}
+                name={person.name}
+                category={person.category}
+                size={112}
+                showRemove={false}
+              />
+            </div>
             <h2 className="person-section-title">{t.persons.bio}</h2>
             <p className="person-section-text">{person.bio}</p>
           </section>
@@ -48,6 +62,11 @@ export default function PersonDetailClient({ person }: { person: MockPerson }) {
           <section style={{ marginTop: 32 }}>
             <h2 className="person-section-title">{t.persons.funFact}</h2>
             <p className="person-section-text">{person.funFact}</p>
+            {person.funFactSourceUrl && (
+              <a href={person.funFactSourceUrl} target="_blank" rel="noopener noreferrer" className="person-source-link">
+                {t.persons.source}
+              </a>
+            )}
           </section>
         )}
 

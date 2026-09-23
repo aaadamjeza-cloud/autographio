@@ -11,7 +11,7 @@ export default async function PersonDetailPage({ params }: { params: Promise<{ s
   return (
     <>
       <Header />
-      <main className="page-content" style={{ maxWidth: 900, margin: "0 auto", padding: "16px 24px 80px" }}>
+      <main className="page-content" style={{ maxWidth: 1160, margin: "0 auto", padding: "16px 24px 80px" }}>
         <PersonDetailClient person={person} />
       </main>
     </>
