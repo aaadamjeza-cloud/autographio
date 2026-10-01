@@ -307,19 +307,27 @@ const PersonPortrait = forwardRef<
   const effectiveUrl = isSupabase ? remoteUrl : localDataUrl;
   const isWide = variant === "wide";
   const label = effectiveUrl ? t.photoPicker.changePhoto : t.photoPicker.addPhoto;
+  // Signed-out visitors can never actually upload here (see openPicker and
+  // uploadSupabase's own checks) — don't dress the tile up as clickable for
+  // them at all: no hand cursor, no hover "+", no keyboard focus stop.
+  const locked = isSupabase && !user;
 
   return (
     <>
       <span
-        role="button"
-        tabIndex={0}
-        onClick={openPicker}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") openPicker(e);
-        }}
-        className={`portrait-tile${isWide ? " portrait-tile-wide" : ""}`}
+        role={locked ? undefined : "button"}
+        tabIndex={locked ? undefined : 0}
+        onClick={locked ? undefined : openPicker}
+        onKeyDown={
+          locked
+            ? undefined
+            : (e) => {
+                if (e.key === "Enter" || e.key === " ") openPicker(e);
+              }
+        }
+        className={`portrait-tile${isWide ? " portrait-tile-wide" : ""}${locked ? " portrait-tile-locked" : ""}`}
         style={isWide ? undefined : { width: size, height: size, borderRadius: "50%" }}
-        aria-label={`${label} — ${name}`}
+        aria-label={locked ? name : `${label} — ${name}`}
       >
         {effectiveUrl ? (
           // eslint-disable-next-line @next/next/no-img-element -- locally cached data: URL or hotlinked Supabase public Storage URL, not a locally optimizable asset
@@ -347,9 +355,11 @@ const PersonPortrait = forwardRef<
           <PersonAvatar name={name} category={category} gender={gender} size={size} />
         )}
 
-        <span className="portrait-hover-hint" aria-hidden="true">
-          {isWide ? label : "+"}
-        </span>
+        {!locked && (
+          <span className="portrait-hover-hint" aria-hidden="true">
+            {isWide ? label : "+"}
+          </span>
+        )}
 
         {busy && (
           <span className="portrait-busy" aria-hidden="true">
