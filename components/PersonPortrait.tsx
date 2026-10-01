@@ -264,6 +264,13 @@ const PersonPortrait = forwardRef<
   function openPicker(e: MouseEvent | KeyboardEvent) {
     e.preventDefault();
     e.stopPropagation();
+    // Signed out, nothing to upload as: the real gate is uploadSupabase's
+    // own `if (!user) throw` (and RLS behind it), but there's no reason to
+    // even open the OS file picker first just to reject the pick afterwards.
+    if (isSupabase && !user) {
+      setSaveError(t.photoPicker.signInRequired);
+      return;
+    }
     inputRef.current?.click();
   }
 
