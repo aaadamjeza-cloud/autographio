@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import t from "@/lib/i18n";
+import { useTranslation } from "@/lib/i18n/I18nProvider";
 import { formatBytes } from "@/lib/format";
 import { resizeImageToWebp } from "@/lib/resizeImage";
 import { createClient } from "@/lib/supabase/client";
@@ -28,14 +28,15 @@ type Photo = {
 // 0003), so nobody but the uploader can read, sign a URL for, or delete a
 // given photo — enforced at the database, not just by hiding the button.
 export default function PhotoPicker({ itemId, userId }: { itemId: string; userId: string }) {
+  const t = useTranslation();
   const [photos, setPhotos] = useState<Photo[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
+  const supabase = createClient();
 
   const atLimit = photos.length >= MAX_PHOTOS;
 
   useEffect(() => {
     let cancelled = false;
-    const supabase = createClient();
 
     (async () => {
       const { data, error } = await supabase
@@ -65,7 +66,7 @@ export default function PhotoPicker({ itemId, userId }: { itemId: string; userId
     return () => {
       cancelled = true;
     };
-  }, [itemId]);
+  }, [itemId, supabase]);
 
   async function uploadFile(file: File) {
     const id = crypto.randomUUID();
@@ -80,7 +81,6 @@ export default function PhotoPicker({ itemId, userId }: { itemId: string; userId
     }
 
     setPhotos((prev) => [...prev, { id, status: "processing", originalSize: file.size }]);
-    const supabase = createClient();
 
     try {
       const resized = await resizeImageToWebp(file);
@@ -91,8 +91,11 @@ export default function PhotoPicker({ itemId, userId }: { itemId: string; userId
       );
 
       const storagePath = `${userId}/${itemId}/${crypto.randomUUID()}.webp`;
+      // Safari's canvas.toBlob() silently falls back to PNG when asked for
+      // WebP — use the blob's own (correct) type rather than assuming WebP,
+      // see supabase/migrations/0006_allow_png_fallback.sql.
       const { error: uploadError } = await supabase.storage.from(BUCKET).upload(storagePath, resized.blob, {
-        contentType: "image/webp",
+        contentType: resized.blob.type,
       });
       if (uploadError) throw uploadError;
 
@@ -127,7 +130,6 @@ export default function PhotoPicker({ itemId, userId }: { itemId: string; userId
     }
 
     setPhotos((prev) => prev.map((p) => (p.id === photo.id ? { ...p, status: "removing" } : p)));
-    const supabase = createClient();
     const { error: storageError } = await supabase.storage.from(BUCKET).remove([photo.storagePath]);
     const { error: dbError } = await supabase.from("item_photos").delete().eq("id", photo.id);
 

@@ -1,31 +1,21 @@
-import { createServerClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
+import { auth } from "@clerk/nextjs/server";
+import { createClient } from "@supabase/supabase-js";
 
-// Supabase client for Server Components, Server Actions and Route Handlers —
-// reads the signed-in user from request cookies, respects RLS. Server
-// Components can't set cookies (Next.js throws) — that's fine, the
-// middleware's own client already refreshes the session cookie on every
-// request, so this write attempt here is a best-effort no-op in that case.
+// Supabase client for Server Components, Server Actions and Route Handlers,
+// authenticated as the current Clerk user (Clerk is a Third-Party Auth
+// provider — see supabase/migrations/0005_clerk_auth.sql). Plain
+// supabase-js `createClient`, not @supabase/ssr's `createServerClient`:
+// that helper exists to sync *Supabase's own* auth session into cookies for
+// SSR, which doesn't apply here — Clerk owns the session. Wiring it up
+// anyway (it requires a `cookies` adapter) makes it internally subscribe to
+// Supabase auth state changes to know when to rewrite those cookies, and
+// that subscription throws once `accessToken` is configured, since there's
+// no Supabase-managed session to watch. RLS still applies as normal — it's
+// just auth.jwt() reading a Clerk-issued token instead of a Supabase one.
 export async function createServerSupabase() {
-  const cookieStore = await cookies();
-  return createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() {
-          return cookieStore.getAll();
-        },
-        setAll(cookiesToSet) {
-          try {
-            cookiesToSet.forEach(({ name, value, options }) => {
-              cookieStore.set(name, value, options);
-            });
-          } catch {
-            // Called from a Server Component — ignored, middleware refreshes the session.
-          }
-        },
-      },
-    }
-  );
+  const { getToken } = await auth();
+
+  return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, {
+    accessToken: async () => (await getToken()) ?? null,
+  });
 }

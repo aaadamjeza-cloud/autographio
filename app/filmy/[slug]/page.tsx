@@ -4,12 +4,13 @@ import Header from "@/components/Header";
 import FilmPoster from "@/components/FilmPoster";
 import { findMockFilm } from "@/lib/mockData/films";
 import { MOCK_PERSONS } from "@/lib/mockData/persons";
-import t from "@/lib/i18n";
+import { getServerTranslation } from "@/lib/i18n/server";
 
 export default async function FilmDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const film = findMockFilm(slug);
   if (!film) notFound();
+  const t = await getServerTranslation();
 
   return (
     <>
@@ -17,7 +18,7 @@ export default async function FilmDetailPage({ params }: { params: Promise<{ slu
       <main className="page-content" style={{ maxWidth: 720, margin: "0 auto", padding: "32px 24px 80px" }}>
         <div className="film-detail-head">
           <div className="film-poster-wide">
-            <FilmPoster slug={film.slug} title={film.title} originalTitle={film.originalTitle} />
+            <FilmPoster slug={film.slug} title={film.title} originalTitle={film.originalTitle} genre={film.genre} />
           </div>
           <div>
             <p className="person-detail-meta" style={{ marginBottom: 6 }}>

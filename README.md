@@ -1,4 +1,4 @@
-# Autografio
+# Autographio
 
 Nekomerční koníčkový web pro českou komunitu sběratelů autogramů (s výhledem na zahraničí). Soukromá evidence sbírky, katalog osobností a sledování žádostí o podpis s veřejnou agregovanou statistikou.
 
@@ -30,4 +30,4 @@ Otevři [http://localhost:3000](http://localhost:3000).
 
 ## Poznámka k Monetiu
 
-Autografio z Monetia pouze čerpá inspiraci (stack, vzhled, vzory kódu — vždy zkopírované a upravené, nikdy linkované). Monetio zůstává nedotčené, běží ve vlastní složce se svým produkčním provozem.
+Autographio z Monetia pouze čerpá inspiraci (stack, vzhled, vzory kódu — vždy zkopírované a upravené, nikdy linkované). Monetio zůstává nedotčené, běží ve vlastní složce se svým produkčním provozem.

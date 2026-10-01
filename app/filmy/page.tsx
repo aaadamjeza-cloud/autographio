@@ -1,14 +1,22 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { Suspense, useMemo, useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import Header from "@/components/Header";
 import FilmPoster from "@/components/FilmPoster";
 import { MOCK_FILMS } from "@/lib/mockData/films";
-import t from "@/lib/i18n";
+import { useTranslation } from "@/lib/i18n/I18nProvider";
 
-export default function FilmsPage() {
-  const [query, setQuery] = useState("");
+function FilmsPageContent() {
+  const t = useTranslation();
+  // Same derive-from-URL-until-overridden pattern as /osobnosti — the
+  // header's search box (see components/Header.tsx) can land here with
+  // ?hledat=..., and typing in the box on this page itself should still
+  // win over that once the person types again.
+  const searchFromUrl = useSearchParams().get("hledat") ?? "";
+  const [queryOverride, setQueryOverride] = useState<string | null>(null);
+  const query = queryOverride ?? searchFromUrl;
 
   const filtered = useMemo(() => {
     return MOCK_FILMS.filter((f) => !query.trim() || f.title.toLowerCase().includes(query.trim().toLowerCase()));
@@ -29,7 +37,7 @@ export default function FilmsPage() {
               type="text"
               placeholder={t.films.search}
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={(e) => setQueryOverride(e.target.value)}
             />
           </div>
         </div>
@@ -38,7 +46,7 @@ export default function FilmsPage() {
           {filtered.length === 0 && <p className="persons-empty">Žádný film neodpovídá hledání.</p>}
           {filtered.map((f) => (
             <Link key={f.slug} href={`/filmy/${f.slug}`} className="film-card">
-              <FilmPoster slug={f.slug} title={f.title} originalTitle={f.originalTitle} />
+              <FilmPoster slug={f.slug} title={f.title} originalTitle={f.originalTitle} genre={f.genre} />
               <p className="film-card-year">{f.year}</p>
               <p className="film-card-title">{f.title}</p>
               <p className="film-card-director">
@@ -52,5 +60,13 @@ export default function FilmsPage() {
         </div>
       </main>
     </>
+  );
+}
+
+export default function FilmsPage() {
+  return (
+    <Suspense fallback={null}>
+      <FilmsPageContent />
+    </Suspense>
   );
 }

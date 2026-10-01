@@ -1,15 +1,26 @@
 "use client";
 
 import { useReducer, useRef, useState, useSyncExternalStore, type KeyboardEvent, type MouseEvent } from "react";
+import { Eagle_Lake } from "next/font/google";
 import { resizeImageToWebp, blobToDataUrl } from "@/lib/resizeImage";
-import t from "@/lib/i18n";
+import { useTranslation } from "@/lib/i18n/I18nProvider";
 
-const STORAGE_PREFIX = "autografio:filmposter:";
+// Curled swash caps, looped descenders — the storybook/fairy-tale look for
+// the .film-poster-placeholder--pohadka title, in place of the French azure
+// posters' block-capital Impact.
+const eagleLake = Eagle_Lake({ weight: "400", subsets: ["latin-ext"], display: "swap" });
+
+const STORAGE_PREFIX = "autographio:filmposter:";
 
 // Flat period-appropriate azure, same for every film — styled after the
 // original French poster logo look: bold white block capitals with a hard
 // black drop shadow, nothing else on the card.
 const POSTER_BG = "#8FD3E8";
+
+// Czech fairy tales get a separate look (see .film-poster-placeholder--pohadka
+// in globals.css): warm hand-painted Barrandov-poster gold instead of flat
+// French azure, italic serif instead of block-capital Impact.
+const POSTER_BG_POHADKA = "#dc9a2e";
 
 // "Le Gendarme et les Extra-terrestres" → { lead: "LE GENDARME", rest: "ET
 // LES EXTRA-TERRESTRES" } — echoes the stacked two-size title lettering of
@@ -18,6 +29,15 @@ function splitTitle(title: string): { lead: string; rest: string } {
   const words = title.split(" ");
   const lead = words.slice(0, 2).join(" ").toUpperCase();
   const rest = words.slice(2).join(" ").toUpperCase();
+  return { lead, rest };
+}
+
+// Same split, but keeps natural case — Eagle Lake's swash caps and looped
+// lowercase letters are the whole point, forcing upper case would hide them.
+function splitTitlePohadka(title: string): { lead: string; rest: string } {
+  const words = title.split(" ");
+  const lead = words.slice(0, 2).join(" ");
+  const rest = words.slice(2).join(" ");
   return { lead, rest };
 }
 
@@ -46,11 +66,14 @@ export default function FilmPoster({
   slug,
   title,
   originalTitle,
+  genre,
 }: {
   slug: string;
   title: string;
   originalTitle: string;
+  genre?: "pohadka";
 }) {
+  const t = useTranslation();
   const [busy, setBusy] = useState(false);
   const [saveError, setSaveError] = useState(false);
   const [, bump] = useReducer((n: number) => n + 1, 0);
@@ -126,11 +149,26 @@ export default function FilmPoster({
           // eslint-disable-next-line @next/next/no-img-element -- locally cached data: URL, not a remote/optimizable asset
           <img src={dataUrl} alt={title} className="portrait-img" />
         ) : (
-          <span className="film-poster-placeholder" style={{ background: POSTER_BG }} aria-hidden="true">
-            <span className="film-poster-placeholder-logo">
-              <span className="film-poster-placeholder-lead">{splitTitle(originalTitle).lead}</span>
-              {splitTitle(originalTitle).rest && (
-                <span className="film-poster-placeholder-rest">{splitTitle(originalTitle).rest}</span>
+          <span
+            className={`film-poster-placeholder${genre === "pohadka" ? " film-poster-placeholder--pohadka" : ""}`}
+            style={{ background: genre === "pohadka" ? POSTER_BG_POHADKA : POSTER_BG }}
+            aria-hidden="true"
+          >
+            <span className={`film-poster-placeholder-logo${genre === "pohadka" ? ` ${eagleLake.className}` : ""}`}>
+              {genre === "pohadka" ? (
+                <>
+                  <span className="film-poster-placeholder-lead">{splitTitlePohadka(originalTitle).lead}</span>
+                  {splitTitlePohadka(originalTitle).rest && (
+                    <span className="film-poster-placeholder-rest">{splitTitlePohadka(originalTitle).rest}</span>
+                  )}
+                </>
+              ) : (
+                <>
+                  <span className="film-poster-placeholder-lead">{splitTitle(originalTitle).lead}</span>
+                  {splitTitle(originalTitle).rest && (
+                    <span className="film-poster-placeholder-rest">{splitTitle(originalTitle).rest}</span>
+                  )}
+                </>
               )}
             </span>
           </span>

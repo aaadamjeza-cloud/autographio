@@ -1,4 +1,55 @@
 export interface Dictionary {
+  hero: {
+    title: string;
+    subtitle: string;
+    // A function, not a plain string — the counts must read from the real
+    // catalog data, not be hand-typed and left to drift out of sync.
+    statsLine: (personCount: number, filmCount: number, saleCount: number) => string;
+    ctaPrimary: string;
+    ctaSecondary: string;
+    ctaMicrocopy: string;
+    tryBadge: string;
+    cardTabPerson: string;
+    cardTabPriceTrend: string;
+    priceTrendTitle: (yearMin: number, yearMax: number) => string;
+    estimatedPrice: string;
+    lastSale: string;
+    noSaleYet: string;
+    testimonialQuote: string;
+    testimonialName: string;
+    testimonialRole: string;
+    statPersonsLabel: string;
+    statSalesLabel: string;
+  };
+  header: {
+    searchPlaceholder: string;
+    navHomeAria: string;
+    navAll: string;
+    navActors: string;
+    navAthletes: string;
+    navWriters: string;
+    navMusicians: string;
+    latestSalePrefix: string;
+  };
+  home: {
+    featuresTitle: string;
+    featureNewBadge: string;
+    featureCollectionTitle: string;
+    featureCollectionText: string;
+    featureCatalogTitle: string;
+    // A function, not a plain string — the "180+" figure must read from the
+    // real catalog count (see H in the layout pass), not be hand-typed and
+    // left to drift out of sync with the actual data.
+    featureCatalogText: (personCount: number) => string;
+    featureRequestsTitle: string;
+    featureRequestsText: string;
+    featureRequestStatsTitle: string;
+    featureRequestStatsText: string;
+    featureCommunityPricesTitle: string;
+    featureCommunityPricesText: string;
+    featurePrivacyTitle: string;
+    featurePrivacyText: string;
+  };
   common: {
     save: string;
     cancel: string;
@@ -8,6 +59,8 @@ export interface Dictionary {
     back: string;
     loading: string;
     close: string;
+    myAccount: string;
+    menu: string;
   };
   auth: {
     login: string;
@@ -18,12 +71,30 @@ export interface Dictionary {
     email: string;
     password: string;
     loginError: string;
+    signUp: string;
+    signUpTitle: string;
+    signUpSubtitle: string;
+    username: string;
+    continueButton: string;
+    orDivider: string;
+    noAccountYet: string;
+    alreadyHaveAccount: string;
+    verifyEmailTitle: string;
+    verifyEmailSubtitle: (email: string) => string;
+    codeLabel: string;
+    verifyButton: string;
+    resendCode: string;
+    codeResent: string;
+    signUpError: string;
+    genericError: string;
   };
   onboarding: {
     displayNameTitle: string;
     displayNameHint: string;
     displayNamePlaceholder: string;
     continue: string;
+    saveError: string;
+    nameTakenError: string;
   };
   collection: {
     title: string;
@@ -36,6 +107,45 @@ export interface Dictionary {
     personNameLabel: string;
     personNamePlaceholder: string;
     createItemError: string;
+    noValue: string;
+    deleteConfirm: string;
+    deleteError: string;
+    continueEditing: string;
+    acquisitionSectionTitle: string;
+    valueSectionTitle: string;
+    itemTypeLabel: string;
+    acquisitionMethodLabel: string;
+    acquisitionMethod: {
+      mail: string;
+      in_person: string;
+      purchase: string;
+      trade: string;
+    };
+    quantityLabel: string;
+    acquiredAtLabel: string;
+    purchasePriceLabel: string;
+    estimatedValueLabel: string;
+    noteLabel: string;
+    forSaleLabel: string;
+    forTradeLabel: string;
+    askingPriceLabel: string;
+    tradeWantedLabel: string;
+    tradeStatusLabel: string;
+    tradeStatus: {
+      offered: string;
+      negotiating: string;
+      completed: string;
+    };
+    tradeContactLabel: string;
+    personPageLink: string;
+    wikipediaLink: string;
+    saveChanges: string;
+    updateItemError: string;
+    filterAll: string;
+    filterForSale: string;
+    filterForTrade: string;
+    forSaleBadge: string;
+    forTradeBadge: string;
   };
   itemType: {
     autograph: string;
@@ -55,12 +165,120 @@ export interface Dictionary {
     search: string;
     requestSent: string;
     bio: string;
+    bioFemale: string;
     funFact: string;
     filmography: string;
     photoPlaceholder: string;
-    priceHistory: string;
+    photoCreditPrefix: string;
+    photoCreditCommonsLink: string;
+    photoCreditAi: string;
     verifiedSales: string;
     source: string;
+    requestStats: string;
+    successRate: string;
+    medianWait: string;
+    waitRange: string;
+    days: string;
+    communityPrices: string;
+    reportPriceButton: string;
+    reportButton: string;
+  };
+  priceReportForm: {
+    title: string;
+    priceLabel: string;
+    soldAtLabel: string;
+    sourceNameLabel: string;
+    sourceUrlLabel: string;
+    titleLabel: string;
+    itemTypeLabel: string;
+    authenticationLabel: string;
+    submit: string;
+    pendingNotice: string;
+    signInRequired: string;
+    createError: string;
+  };
+  contentReport: {
+    title: string;
+    reasonLabel: string;
+    submit: string;
+    success: string;
+    error: string;
+    signInRequired: string;
+  };
+  suggestPerson: {
+    cta: string;
+    title: string;
+    intro: string;
+    nameLabel: string;
+    categoryLabel: string;
+    genderLabel: string;
+    genderMale: string;
+    genderFemale: string;
+    birthYearLabel: string;
+    deathYearLabel: string;
+    deathYearHint: string;
+    nationalityLabel: string;
+    bioLabel: string;
+    funFactLabel: string;
+    estimateTitle: string;
+    estimateHint: string;
+    estimateMinLabel: string;
+    estimateMaxLabel: string;
+    salesTitle: string;
+    salesHint: string;
+    addSale: string;
+    removeSale: string;
+    salePriceLabel: string;
+    saleSourceNameLabel: string;
+    saleSourceUrlLabel: string;
+    saleSoldAtLabel: string;
+    filmographyTitle: string;
+    filmographyHint: string;
+    filmographyPlaceholder: string;
+    submit: string;
+    successTitle: string;
+    successText: string;
+    duplicateError: string;
+    createError: string;
+  };
+  review: {
+    title: string;
+    empty: string;
+    approve: string;
+    reject: string;
+    actionError: string;
+    pendingNotice: string;
+    submitted: string;
+    portraitsTitle: string;
+    portraitsEmpty: string;
+    priceReportsTitle: string;
+    priceReportsEmpty: string;
+    contentReportsTitle: string;
+    contentReportsEmpty: string;
+    dismiss: string;
+    reportedBy: string;
+    reportReason: string;
+    targetType: {
+      person: string;
+      item_photo: string;
+      price_report: string;
+    };
+  };
+  signatures: {
+    title: string;
+    cta: string;
+    empty: string;
+    add: string;
+    choosePhoto: string;
+    confirm: string;
+    rightsLabel: string;
+    addedBy: string;
+    anonymous: string;
+    limitReached: string;
+    signInRequired: string;
+    uploadError: string;
+    removeError: string;
+    remove: string;
   };
   requests: {
     title: string;
@@ -74,13 +292,49 @@ export interface Dictionary {
     markReceived: string;
     markReturned: string;
     markNoResponse: string;
+    empty: string;
+    newRequest: string;
+    itemTypeLabel: string;
+    sentAtLabel: string;
+    countryLabel: string;
+    countryPlaceholder: string;
+    postageLabel: string;
+    postage: {
+      cash: string;
+      stamp: string;
+      irc: string;
+      other: string;
+      none: string;
+    };
+    noteLabel: string;
+    submit: string;
+    createError: string;
+    updateError: string;
+    deliveryDetailsTitle: string;
+    optionalHint: string;
+    addressLabel: string;
+    addressPlaceholder: string;
+    enclosedLabel: string;
+    enclosedPlaceholder: string;
+    receivedPhotoLabel: string;
+    daysToReceive: string;
   };
   settings: {
     title: string;
+    accountInfoTitle: string;
+    emailLabel: string;
+    memberSinceLabel: string;
     displayName: string;
     showNameOnPhotos: string;
+    logoutHint: string;
     deleteAccount: string;
     deleteAccountWarning: string;
+    deleteAccountConfirm: string;
+    deleteAccountError: string;
+    saveError: string;
+    nameTakenError: string;
+    nameChangeLimitError: string;
+    changesRemaining: (count: number) => string;
   };
   films: {
     title: string;
@@ -91,6 +345,9 @@ export interface Dictionary {
     cast: string;
     year: string;
     funFact: string;
+  };
+  footer: {
+    privacy: string;
   };
   photoPicker: {
     addPhoto: string;
@@ -104,8 +361,8 @@ export interface Dictionary {
     tooLarge: string;
     notAnImage: string;
     uploadError: string;
+    signInRequired: string;
     saveError: string;
-    clearCache: string;
-    clearCacheConfirm: string;
+    submittedForReview: string;
   };
 }
